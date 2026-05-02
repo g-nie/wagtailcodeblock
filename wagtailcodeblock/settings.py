@@ -1,5 +1,6 @@
 from django.conf import settings
 
+
 PRISM_PREFIX = "//cdnjs.cloudflare.com/ajax/libs/prism/"
 PRISM_VERSION = "1.30.0"
 

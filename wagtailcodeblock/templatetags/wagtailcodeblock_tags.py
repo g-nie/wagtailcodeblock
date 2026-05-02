@@ -2,12 +2,13 @@ from django.template import Library
 from django.utils.safestring import mark_safe
 
 from ..settings import (
-    get_theme,
-    get_line_numbers,
-    get_copy_to_clipboard,
-    PRISM_VERSION,
     PRISM_PREFIX,
+    PRISM_VERSION,
+    get_copy_to_clipboard,
+    get_line_numbers,
+    get_theme,
 )
+
 
 register = Library()
 

@@ -3,7 +3,7 @@ from django.utils.html import format_html_join
 
 from wagtail import hooks
 
-from .settings import get_theme, PRISM_VERSION, PRISM_PREFIX
+from .settings import PRISM_PREFIX, PRISM_VERSION, get_theme
 
 
 @hooks.register("insert_global_admin_css")

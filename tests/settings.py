@@ -1,5 +1,6 @@
 from django.conf import settings
 
+
 WAGTAILADMIN_BASE_URL = "https://example.com"
 ALLOWED_HOSTS = ["*"]
 SECRET_KEY = "tests"

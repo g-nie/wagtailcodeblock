@@ -1,11 +1,12 @@
-import pytest
 from json import dumps
 
 from django.contrib.contenttypes.models import ContentType
+
 from wagtail.models import Page
 
-from tests.models import CodeBlockPage
+import pytest
 
+from tests.models import CodeBlockPage
 
 
 @pytest.fixture
