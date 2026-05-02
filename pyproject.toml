@@ -4,7 +4,7 @@ authors = [{name = "Tim Allen", email = "tallen@wharton.upenn.edu"},]
 description = "Wagtail Code Block provides PrismJS syntax highlighting in Wagtail."
 dynamic = ["version"]
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 keywords = ["wagtail", "cms", "contact", "syntax", "code", "highlighting", "highlighter"]
 license = {text = "BSD-3-Clause"}
 classifiers = [
@@ -18,12 +18,11 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Framework :: Django",
+    "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6.0",
     "Framework :: Wagtail",
-    "Framework :: Wagtail :: 3",
-    "Framework :: Wagtail :: 4",
-    "Framework :: Wagtail :: 5",
-    "Framework :: Wagtail :: 6",
     "Framework :: Wagtail :: 7",
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
@@ -34,11 +33,14 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+  "coverage[toml]>=6.5",
   "django-coverage-plugin",
   "ipython",
-  "ruff",
+  "pre-commit>=4",
   "pytest-coverage",
   "pytest-django",
+  "ruff",
+  "tox>=4.18.1",
 ]
 
 [project.urls]
@@ -47,10 +49,11 @@ dev = [
 "Documentation" = "https://github.com/FlipperPA/wagtailcodeblock"
 
 [build-system]
-requires = ["setuptools>=67", "setuptools_scm>=7", "wheel"]
+requires = ["setuptools>=77", "setuptools_scm>=7", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.coverage.run]
+core = "ctrace"  # django_coverage_plugin's file tracer isn't supported by SysMonitor
 plugins = ["django_coverage_plugin"]
 include = ["wagtailcodeblock/*"]
 
@@ -58,10 +61,48 @@ include = ["wagtailcodeblock/*"]
 write_to = "wagtailcodeblock/_version.py"
 
 [tool.pytest.ini_options]
-addopts = "--cov --cov-report=html --reuse-db"
+addopts = "--reuse-db"
 python_files = "tests.py test_*.py"
 DJANGO_SETTINGS_MODULE = "tests.settings"
 
 [tool.ruff]
-lint.extend-select = ["I"]
-exclude = [".git"] 
+target-version = "py310"  # minimum target version
+exclude = [".git"]
+lint.extend-select = [
+  "B",      # flake8-bugbear
+  "BLE",    # flake8-blind-except
+  "C4",     # flake8-comprehensions
+  "DJ",     # flake8-django
+  "E",      # pycodestyle errors
+  "F",      # pyflakes
+  "G",      # flake8-logging-format
+  "I",      # isort
+  "INT",    # flake8-gettext
+  "PGH",    # pygrep-hooks
+  "PIE",    # flake8-pie
+  "RUF100", # unused noqa
+  "S",      # flake8-bandit
+  "SIM",    # flake8-simplify
+  "T20",    # flake8-print
+  "UP",     # pyupgrade
+  "W",      # pycodestyle warnings
+  "YTT",    # flake8-2020
+]
+lint.extend-ignore = [
+  "E501", # no line length errors
+]
+lint.fixable = ["C4", "E", "F", "I", "UP"]
+lint.isort.force-sort-within-sections = true
+lint.isort.known-first-party = ["wagtailcodeblock"]
+lint.isort.lines-after-imports = 2
+lint.isort.section-order = [
+  "future",
+  "standard-library",
+  "django",
+  "wagtail",
+  "third-party",
+  "first-party",
+  "local-folder",
+]
+lint.isort.sections.django = ["django"]
+lint.isort.sections.wagtail = ["wagtail", "modelcluster"]
