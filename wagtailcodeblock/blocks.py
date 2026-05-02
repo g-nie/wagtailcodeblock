@@ -28,7 +28,7 @@ class CodeBlock(StructBlock):
             ("xml", "XML"),
         )
 
-        if local_blocks is None:
+        if local_blocks is None:  # noqa: SIM108
             local_blocks = []
         else:
             local_blocks = local_blocks.copy()

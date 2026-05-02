@@ -16,7 +16,7 @@ def test_page(db):
     https://github.com/wagtail/wagtail/blob/main/wagtail/core/migrations/0002_initial_data.py#L12
 
     Then create the test page.
-    """  # noqa
+    """
     page_content_type, created = ContentType.objects.get_or_create(
         model="page", app_label="wagtailcore"
     )

@@ -10,7 +10,7 @@ from .settings import PRISM_PREFIX, PRISM_VERSION, get_theme
 def global_admin_css():
     THEME = get_theme()
 
-    if THEME:
+    if THEME:  # noqa: SIM108
         prism_theme = f"-{THEME}"
     else:
         prism_theme = ""

@@ -3,7 +3,7 @@ from django.conf import settings
 
 WAGTAILADMIN_BASE_URL = "https://example.com"
 ALLOWED_HOSTS = ["*"]
-SECRET_KEY = "tests"
+SECRET_KEY = "tests"  # noqa: S105
 DEBUG = True
 USE_TZ = True
 
